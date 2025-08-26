@@ -33,6 +33,15 @@ def index():
         return "You got blue tick check your account"
        
     return render_template("index.html")
+@app.route("/show")
+def show():
+    conn = sqlite3.connect("user.db")
+    c = conn.cursor()
+    c.execute("SELECT * FROM users")
+    data = c.fetchall()
+    conn.close()
+    return str(data)  
+
 
 if __name__ == "__main__":
     app.run(debug=True)
